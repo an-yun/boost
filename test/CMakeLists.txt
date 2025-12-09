@@ -16,3 +16,6 @@ target_link_libraries(lambda Boost::headers)
 # 正则表示式示例
 add_executable(regex regex.cpp)
 target_link_libraries(regex Boost::regex)
+
+add_executable(vector_insert vector_insert.cpp)
+target_link_libraries(vector_insert Boost::regex)

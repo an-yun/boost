@@ -1,30 +1,27 @@
 // 定义如下宏，启用捕获组
-#define BOOST_REGEX_MATCH_EXTRA
+//#define BOOST_REGEX_MATCH_EXTRA
 #include <boost/regex.hpp>
 #include <iostream>
 
-void print_captures(const std::string& regx, const std::string& text)
-{
+void print_captures(const std::string &regx, const std::string &text) {
     boost::regex e(regx);
     boost::smatch what;
     std::cout << "Expression:  \"" << regx << "\"\n";
     std::cout << "Text:        \"" << text << "\"\n";
 
-    if(boost::regex_match(text, what, e, boost::match_extra))
-    {
+    if (boost::regex_match(text, what, e, boost::match_extra)) {
         unsigned i, j;
         std::cout << "** Match found **\n   Sub-Expressions:\n";
         size_t s = what.size();
-        for(i = 0; i < s; ++i)
+        for (i = 0; i < s; ++i)
             std::cout << "      $" << i << " = \"" << what[i] << "\"\n";
+#ifdef  BOOST_REGEX_MATCH_EXTRA
         std::cout << "   Captures:\n";
-        for(i = 0; i < s; ++i)
-        {
+        for (i = 0; i < s; ++i) {
             std::cout << "      $" << i << " = {";
             size_t cs = what.captures(i).size();
-            for(j = 0; j < cs; ++j)
-            {
-                if(j)
+            for (j = 0; j < cs; ++j) {
+                if (j)
                     std::cout << ", ";
                 else
                     std::cout << " ";
@@ -32,19 +29,17 @@ void print_captures(const std::string& regx, const std::string& text)
             }
             std::cout << " }\n";
         }
-    }
-    else
-    {
+#endif
+    } else {
         std::cout << "** No Match found **\n";
     }
 }
 
-int main(int , char* [])
-{
+int main(int, char *[]) {
     print_captures("(([[:lower:]]+)|([[:upper:]]+))+", "aBBcccDDDDDeeeeeeee");
     print_captures("(.*)bar|(.*)bah", "abcbar");
     print_captures("(.*)bar|(.*)bah", "abcbah");
     print_captures("^(?:(\\w+)|(?>\\W+))*$",
-       "now is the time for all good men to come to the aid of the party");
+                   "now is the time for all good men to come to the aid of the party");
     return 0;
 }
