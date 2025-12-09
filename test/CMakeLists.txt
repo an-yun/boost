@@ -3,7 +3,12 @@ if(POLICY CMP0167)
     cmake_policy(SET CMP0167 OLD)
 endif()
 find_package(Boost REQUIRED COMPONENTS regex)
-
+execute_process(
+        COMMAND echo
+        COMMAND bash -c "g++ -E -Wp,-v - 2>&1"
+        COMMAND awk "/^#include .* starts here:$/,/^End of search list/ { if ($0 ~ /^ /) { print } }"
+        OUTPUT_VARIABLE SYS_INCLUDES_OUT)
+message("${SYS_INCLUDES_OUT}")
 # lambda示例
 add_executable(lambda lambda.cpp)
 target_link_libraries(lambda Boost::headers)
