@@ -17,12 +17,23 @@ void print_vector(const std::vector<insert_type> & v) {
     std::cout << std::endl;
 }
 
+
 void insert(std::vector<insert_type> & v, size_t n, const std::string &c) {
     insert_type content(c.begin());
     content.second = c.end();
     content.matched = true;
-    std::fill(v.begin(),v.end(), content);
-    v.insert(v.end(), n, content);
+    size_t len = v.size();
+    if(len > n + 2)
+    {
+        v.erase(v.begin()+n+2, v.end());
+        std::fill(v.begin(), v.end(), content);
+    }
+    else
+    {
+        std::fill(v.begin(), v.end(), content);
+        if(n+2 != len)
+            v.insert(v.end(), n+2-len, content);
+    }
     print_vector(v);
 }
 

@@ -1,5 +1,5 @@
 // 定义如下宏，启用捕获组
-//#define BOOST_REGEX_MATCH_EXTRA
+#define BOOST_REGEX_MATCH_EXTRA
 #include <boost/regex.hpp>
 #include <iostream>
 
@@ -36,6 +36,7 @@ void print_captures(const std::string &regx, const std::string &text) {
 }
 
 int main(int, char *[]) {
+    std::cout<<__cplusplus <<std::endl;
     print_captures("(([[:lower:]]+)|([[:upper:]]+))+", "aBBcccDDDDDeeeeeeee");
     print_captures("(.*)bar|(.*)bah", "abcbar");
     print_captures("(.*)bar|(.*)bah", "abcbah");
