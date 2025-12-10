@@ -1,5 +1,3 @@
-// 定义如下宏，启用捕获组
-#define BOOST_REGEX_MATCH_EXTRA
 #include <boost/regex.hpp>
 #include <iostream>
 
@@ -15,6 +13,7 @@ void print_captures(const std::string &regx, const std::string &text) {
         size_t s = what.size();
         for (i = 0; i < s; ++i)
             std::cout << "      $" << i << " = \"" << what[i] << "\"\n";
+        // 如果定义了如下宏，说明启用了捕获组扩展功能
 #ifdef  BOOST_REGEX_MATCH_EXTRA
         std::cout << "   Captures:\n";
         for (i = 0; i < s; ++i) {
