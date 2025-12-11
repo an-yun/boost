@@ -17,5 +17,9 @@ target_link_libraries(lambda Boost::headers)
 add_executable(regex regex.cpp)
 target_link_libraries(regex Boost::regex)
 
+# bug正则表示式
+add_executable(regex_bug regex_bug.cpp)
+target_link_libraries(regex_bug Boost::regex)
+
 add_executable(vector_insert vector_insert.cpp)
 target_link_libraries(vector_insert Boost::regex)
