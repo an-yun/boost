@@ -21,5 +21,24 @@ target_link_libraries(regex Boost::regex)
 add_executable(regex_bug regex_bug.cpp)
 target_link_libraries(regex_bug Boost::regex)
 
-add_executable(vector_insert vector_insert.cpp)
-target_link_libraries(vector_insert Boost::regex)
+add_library(macro_pod)
+
+target_sources(macro_pod
+        PRIVATE
+        do_nothing.cpp
+        PUBLIC
+        FILE_SET HEADERS
+        FILES
+        macro_pod.hpp
+)
+# 复现内存布局导致的bug
+add_executable(vector_insert)
+
+target_sources(vector_insert
+        PRIVATE
+        vector_insert.cpp
+)
+target_link_libraries(vector_insert
+        PRIVATE
+        macro_pod
+)

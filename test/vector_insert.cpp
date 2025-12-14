@@ -1,45 +1,16 @@
 //
 // Created by zuo on 2025/12/9.
 //
-#include <vector>
-#include <string>
-#include <iostream>
-#include <boost/regex.hpp>
-
-using insert_type = boost::match_results<std::string::const_iterator>::value_type;
-
-void insert(std::vector<insert_type> &v, size_t n, const std::string &c);
-
-void print_vector(const std::vector<insert_type> &v);
+#define ADD_MEMBER
+#include <macro_pod.hpp>
 
 
 int main() {
-    const size_t sub_match_size = sizeof(insert_type);
-    std::vector<insert_type> v;
-    std::string content{"hello"};
-    insert(v, 4, content);
-    print_vector(v);
-}
-
-
-void insert(std::vector<insert_type> &v, size_t n, const std::string &c) {
-    insert_type content(c.begin());
-    content.second = c.end();
-    content.matched = true;
-    size_t len = v.size();
-    std::fill(v.begin(), v.end(), content);
-    if (n + 2 != len)
-        v.insert(v.end(), n + 2 - len, content);
-    print_vector(v);
-}
-
-
-void print_vector(const std::vector<insert_type> &v) {
-    std::cout << "vector长度为" << v.size();
-    std::string comma{": "};
-    for (const insert_type &i: v) {
-        std::cout << comma << i.str();
-        comma = ", ";
-    }
-    std::cout << std::endl;
+    const size_t macro_pod_size = sizeof(macro_pod);
+    std::cout << "In main.cpp macro_pod_size:" << macro_pod_size <<std::endl;
+    macro_pod m{1};
+    size_t n = 6;
+    std::vector<macro_pod> v;
+    init_macro_pod_vector(v, n, m);
+    std::cout << "After insert macro_pod_vector size:" << v.size() <<std::endl;
 }
