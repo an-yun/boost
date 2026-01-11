@@ -42,3 +42,10 @@ target_link_libraries(vector_insert
         PRIVATE
         macro_pod
 )
+
+add_executable(stl_debug)
+
+target_sources(stl_debug
+        PRIVATE
+        stl_debug.cpp
+)
