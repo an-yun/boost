@@ -9,7 +9,7 @@ using namespace std;
 int main() {
     string hello = "hello";
     string world = "world";
-    cout << "hello world" << endl;
+    cout << "hello c++ " << __cplusplus <<endl;
     cout << hello << " "<< world <<endl;
     vector<string> vec;
     vec.push_back(hello);
